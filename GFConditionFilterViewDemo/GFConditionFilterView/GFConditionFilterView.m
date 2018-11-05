@@ -286,11 +286,11 @@
         [self changeBtn:_dataSource3Btn Text:[NSString stringWithFormat:@"%@",thirdAry.firstObject] Font:[UIFont systemFontOfSize:13] ImageName:@"PR_filter_choice"];
         _dataSource3 = thirdAry;
     }
-//    [self dismiss];
-    BOOL isFilter = YES;
-    if (self.filterBlock) {
-        self.filterBlock(isFilter,_dataSource1,_dataSource2,_dataSource3);
-    }
+    [self dismiss];
+//    BOOL isFilter = YES;
+//    if (self.filterBlock) {
+//        self.filterBlock(isFilter,_dataSource1,_dataSource2,_dataSource3);
+//    }
     
 }
 
@@ -322,6 +322,7 @@
     // 选择筛选条件，直接开始网络请求
     BOOL isFilter = YES;
     if (self.filterBlock) {
+        NSLog(@"choseSort!!!");
         self.filterBlock(isFilter,_dataSource1,_dataSource2,_dataSource3);
     }
 }
@@ -366,10 +367,7 @@
     NSArray *tempDataSource2 = [NSArray arrayWithArray:dataSource2Ary];
     NSArray *tempDataSource3 = [NSArray arrayWithArray:dataSource3Ary];
     
-    
-    
-    
-    
+
     // 改变 按键 值
     [self changeTitleWithData1:tempDataSource1 Data2:tempDataSource2 Data3:tempDataSource3];
     
@@ -377,6 +375,7 @@
     
     if(self.filterBlock)
     {
+        NSLog(@"bindChoseArrayDataSource1!!!");
         self.filterBlock(isFilter,tempDataSource1,tempDataSource2,tempDataSource3);
     }
 }

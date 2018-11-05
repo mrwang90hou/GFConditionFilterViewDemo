@@ -40,16 +40,13 @@
             _selectedDataSource1Ary = dataSource1Ary;
             _selectedDataSource2Ary = dataSource2Ary;
             _selectedDataSource3Ary = dataSource3Ary;
-            //
-            //            NSLog(@"%@",dataSource1Ary);
-            //            NSLog(@"%@",dataSource2Ary);
-            //            NSLog(@"%@",dataSource3Ary);
+            
         }else{
             // 不是筛选，全部赋初值（在这个工程其实是没用的，因为tableView是选中后必选的，即一旦选中就没有空的情况，但是如果可以清空筛选条件的时候就有必要 *重新* reset data）
             _selectedDataSource1Ary = @[@"综合排序"];
             _selectedDataSource2Ary = @[];
             _selectedDataSource3Ary = @[];
-            NSLog(@"综合排序!");
+            NSLog(@"isFilter = NO !综合排序!");
             //记录当前请求的type 数值
         }
         //判断当前的状态选择，并进行网络请求
@@ -86,10 +83,19 @@
     NSString *source1 = [NSString stringWithFormat:@"%@",_selectedDataSource1Ary.firstObject];
     NSString *source2 = [NSString stringWithFormat:@"%@",_selectedDataSource2Ary.firstObject];
     NSString *source3 = [NSString stringWithFormat:@"%@",_selectedDataSource3Ary.firstObject];
+    
+//    NSMutableArray *nsArr = [NSMutableArray new];
+//    [nsArr addObject:source1];
+//    [nsArr addObject:source2];
+//    [nsArr addObject:source3];
     NSArray *strArr = @[source1,source2,source3];
+//    NSArray *strArr = [nsArr copy];
     NSString *typeStr = @"";
     for (NSString *str in strArr) {
-        if (str) {
+//        if (str.length != 0) {
+//        if (![str isEqual:[NSNull null]]) {
+//        if(![str isKindOfClass:[NSNull class]] && ![str isEqual:[NSNull null]] && str != nil){
+        if (![str isEqualToString:@"(null)"]) {
             typeStr = str;
             break;
         }
@@ -105,8 +111,6 @@
     }
     NSLog(@"当前查询方法为：%@,第%d种查询方法！！！",[typeStrArr objectAtIndex:flagNumer],flagNumer);
     //flag=0综合查询,1优惠券面值高到低，2优惠券面值低到高，3券后价由高到低，4、券后价由低到高，5，销量由高到低，6，销量由低到高
-    
-    
     NSDictionary *dic = [_conditionFilterView keyValueDic];
     // 可以用字符串在dic换成对应英文key
     
